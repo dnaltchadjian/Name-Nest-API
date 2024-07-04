@@ -11,7 +11,7 @@ public class FirstName {
     private String gender;
 
     public String getName() {
-        return name;
+        return name.replaceAll("\\+", " ");
     }
 
     public String getGender() {

@@ -3,6 +3,7 @@ package don.chad.namehunter.util;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import don.chad.namehunter.model.FirstName;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,10 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AtlasUtil {
+@Service
+public class AtlasService {
 
-    public static List<FirstName> NAME_LIST = createNameList();
-    public static Map<String, FirstName> NAME_ATLAS = createNameAtlas(NAME_LIST);
+    private List<FirstName> nameList;
+
+    public List<FirstName> getNameList() {
+        if (nameList == null) {
+            nameList = createNameList();
+        }
+        return nameList;
+    }
 
     private static List<FirstName> createNameList() {
 
@@ -26,10 +34,7 @@ public class AtlasUtil {
                     .withType(FirstName.class)
                     .withSeparator(';')
                     .build();
-
-            List<FirstName> parse = cb.parse();
-            return parse;
-
+            return cb.parse();
         } catch (IOException e) {
             e.printStackTrace();
         }
