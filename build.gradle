@@ -28,9 +28,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
-
-	// https://mvnrepository.com/artifact/com.opencsv/opencsv
-	implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
 }
 
 tasks.named('test') {
