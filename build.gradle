@@ -26,6 +26,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv
 	implementation group: 'me.paulschwarz', name: 'spring-dotenv', version: '2.5.4'
 
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
+
 	// https://mvnrepository.com/artifact/com.opencsv/opencsv
 	implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
 }
