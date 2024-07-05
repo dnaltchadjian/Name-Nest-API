@@ -19,8 +19,12 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv
+	implementation group: 'me.paulschwarz', name: 'spring-dotenv', version: '2.5.4'
 
 	// https://mvnrepository.com/artifact/com.opencsv/opencsv
 	implementation group: 'com.opencsv', name: 'opencsv', version: '5.8'
