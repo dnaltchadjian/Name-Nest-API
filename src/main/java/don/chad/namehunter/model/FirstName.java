@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import static don.chad.namehunter.util.CountryConstants.*;
+
 @Document(collection = "names")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,69 +21,113 @@ public class FirstName {
 
     private String gender;
 
-    @Field("Great Britain")
+    @Field(GREAT_BRITAIN)
     private Integer greatBritain;
-
+    @Field(IRELAND)
     private Integer ireland;
+    @Field(USA)
     private Integer usa;
+    @Field(ITALY)
     private Integer italy;
+    @Field(MALTA)
     private Integer malta;
+    @Field(PORTUGAL)
     private Integer portugal;
+    @Field(SPAIN)
     private Integer spain;
+    @Field(FRANCE)
     private Integer france;
+    @Field(LUXEMBOURG)
     private Integer luxembourg;
-    @Field("the Netherlands")
+    @Field(THE_NETHERLANDS)
     private Integer theNetherlands;
-    @Field("East Frisia")
+    @Field(EAST_FRISIA)
     private Integer eastFrisia;
+    @Field(GERMANY)
     private Integer germany;
+    @Field(AUSTRIA)
     private Integer austria;
+    @Field(SWISS)
     private Integer swiss;
+    @Field(ICELAND)
     private Integer iceland;
+    @Field(DENMARK)
     private Integer denmark;
+    @Field(NORWAY)
     private Integer norway;
+    @Field(SWEDEN)
     private Integer sweden;
+    @Field(FINLAND)
     private Integer finland;
+    @Field(ESTONIA)
     private Integer estonia;
+    @Field(LATVIA)
     private Integer latvia;
+    @Field(LITHUANIA)
     private Integer lithuania;
+    @Field(POLAND)
     private Integer poland;
-    @Field("Czech Republic")
+    @Field(CZECH)
     private Integer czech;
+    @Field(SLOVAKIA)
     private Integer slovakia;
+    @Field(HUNGARY)
     private Integer hungary;
+    @Field(ROMANIA)
     private Integer romania;
+    @Field(BULGARIA)
     private Integer bulgaria;
-    @Field("Bosnia and Herzegovina")
+    @Field(BOSNIA_AND_HERZEGOVINA)
     private Integer bosniaAndHerzegovina;
+    @Field(CROATIA)
     private Integer croatia;
+    @Field(KOSOVO)
     private Integer kosovo;
+    @Field(MACEDONIA)
     private Integer macedonia;
+    @Field(MONTENEGRO)
     private Integer montenegro;
+    @Field(SERBIA)
     private Integer serbia;
+    @Field(SLOVENIA)
     private Integer slovenia;
+    @Field(ALBANIA)
     private Integer albania;
+    @Field(GREECE)
     private Integer greece;
+    @Field(RUSSIA)
     private Integer russia;
+    @Field(BELARUS)
     private Integer belarus;
+    @Field(MOLDOVA)
     private Integer moldova;
+    @Field(UKRAINE)
     private Integer ukraine;
+    @Field(ARMENIA)
     private Integer armenia;
+    @Field(AZERBAIJAN)
     private Integer azerbaijan;
+    @Field(GEORGIA)
     private Integer georgia;
-    @Field("Kazakhstan/Uzbekistan,etc")
+    @Field(KAZAKHSTAN_UZBEKISTAN)
     private Integer kazakhstanUzbekistan;
+    @Field(TURKEY)
     private Integer turkey;
-    @Field("Arabia/Persia")
+    @Field(ARABIA_PERSIA)
     private Integer arabiaPersia;
+    @Field(ISRAEL)
     private Integer israel;
+    @Field(CHINA)
     private Integer china;
-    @Field("India/Sri Lanka")
+    @Field(INDIA_SRI_LANKA)
     private Integer indiaSriLanka;
+    @Field(JAPAN)
     private Integer japan;
+    @Field(KOREA)
     private Integer korea;
+    @Field(VIETNAM)
     private Integer vietnam;
-    @Field("other countries")
+    @Field(OTHER_COUNTRIES)
     private Integer otherCountries;
 
     public ObjectId getId() {
