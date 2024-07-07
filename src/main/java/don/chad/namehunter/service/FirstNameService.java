@@ -36,7 +36,7 @@ public class FirstNameService {
         return firstNameRepository.findAll();
     }
 
-    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, CountriesOfOrigin countriesOfOrigin) {
+    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, CountriesOfOrigin countriesOfOrigin) {
 
         Query query = new Query();
         List<Criteria> baseCriteriaList = new ArrayList<>();
@@ -49,13 +49,45 @@ public class FirstNameService {
         if (contains != null) {
             baseCriteriaList.add(Criteria.where("name").regex(contains, "i"));
         }
-
         Criteria criteria = new Criteria().andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
-        criteria.orOperator(getCountriesCriteria(countriesOfOrigin));
+
+        List<Criteria> genderCriteria = getGenderCriteria(gender);
+        if (!genderCriteria.isEmpty()) {
+            criteria.orOperator(genderCriteria);
+        }
+        List<Criteria> countriesCriteria = getCountriesCriteria(countriesOfOrigin);
+        if (!countriesCriteria.isEmpty()) {
+            criteria.orOperator(countriesCriteria);
+        }
         query.addCriteria(criteria);
         return mongoTemplate.find(query, FirstName.class);
     }
 
+    /**
+     * Create a list of query criteria based on the gender provided in the URL.
+     * @param gender the gender string.
+     * @return the list of criteria for the query.
+     */
+    private List<Criteria> getGenderCriteria(String gender) {
+        List<Criteria> genderCriteria = new ArrayList<>();
+        if (gender != null) {
+            if ("unisex".equalsIgnoreCase(gender)) {
+                genderCriteria.add(Criteria.where("gender").is("?"));
+                genderCriteria.add(Criteria.where("gender").is("?F"));
+                genderCriteria.add(Criteria.where("gender").is("?M"));
+            } else {
+                genderCriteria.add(Criteria.where("gender").regex(gender));
+                genderCriteria.add(Criteria.where("gender").is("?"));
+            }
+        }
+        return genderCriteria;
+    }
+
+    /**
+     * Create a list of query criteria based on the countries of origin specified in the URL.
+     * @param countriesOfOrigin object containing the countries of origin.
+     * @return the list of criteria for the query.
+     */
     private List<Criteria> getCountriesCriteria(CountriesOfOrigin countriesOfOrigin) {
 
         List<Criteria> criteriaList = new ArrayList<>();
