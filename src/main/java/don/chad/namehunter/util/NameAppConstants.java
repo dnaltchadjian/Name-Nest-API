@@ -1,6 +1,10 @@
 package don.chad.namehunter.util;
 
-public class CountryConstants {
+public class NameAppConstants {
+
+    public static final String NAME = "name";
+    public static final String GENDER = "gender";
+    public static final String UNISEX = "unisex";
 
     public static final String ALBANIA = "Albania";
     public static final String ARABIA_PERSIA = "Arabia/Persia";

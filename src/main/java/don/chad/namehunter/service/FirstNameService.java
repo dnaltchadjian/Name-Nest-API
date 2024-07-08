@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static don.chad.namehunter.util.CountryConstants.*;
+import static don.chad.namehunter.util.NameAppConstants.*;
 
 @Service
 public class FirstNameService {
@@ -36,59 +36,70 @@ public class FirstNameService {
         return firstNameRepository.findAll();
     }
 
+    /**
+     * Constructs a query based on the passed in parameters including regular expressions, gender, and origin countries.
+     * @param startsWith an expression to be searched for in the start of a name.
+     * @param endsWith an expression to be searched for at the end of a name.
+     * @param contains an expression to be searched for in any part of the name.
+     * @param gender the implied gender of the name (M, F, or unisex).
+     * @param countriesOfOrigin the country weighting for each name contained within an object.
+     * @return a List of FirstName objects which match the query.
+     */
     public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, CountriesOfOrigin countriesOfOrigin) {
 
         Query query = new Query();
         List<Criteria> baseCriteriaList = new ArrayList<>();
         if (startsWith != null) {
-            baseCriteriaList.add(Criteria.where("name").regex("^" + startsWith, "i"));
+            baseCriteriaList.add(Criteria.where(NAME).regex("^" + startsWith, "i"));
         }
         if (endsWith != null) {
-            baseCriteriaList.add(Criteria.where("name").regex(endsWith + "$", "i"));
+            baseCriteriaList.add(Criteria.where(NAME).regex(endsWith + "$", "i"));
         }
         if (contains != null) {
-            baseCriteriaList.add(Criteria.where("name").regex(contains, "i"));
+            baseCriteriaList.add(Criteria.where(NAME).regex(contains, "i"));
         }
-        Criteria criteria = new Criteria().andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
 
-        List<Criteria> genderCriteria = getGenderCriteria(gender);
-        if (!genderCriteria.isEmpty()) {
-            criteria.orOperator(genderCriteria);
+        Criteria genderCriteria = getGenderCriteria(gender);
+        if (genderCriteria != null) {
+            baseCriteriaList.add(genderCriteria);
         }
-        List<Criteria> countriesCriteria = getCountriesCriteria(countriesOfOrigin);
-        if (!countriesCriteria.isEmpty()) {
-            criteria.orOperator(countriesCriteria);
+        Criteria countriesCriteria = getCountriesCriteria(countriesOfOrigin);
+        if (countriesCriteria != null) {
+            baseCriteriaList.add(countriesCriteria);
         }
+
+        Criteria criteria = new Criteria().andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
         query.addCriteria(criteria);
         return mongoTemplate.find(query, FirstName.class);
     }
 
     /**
-     * Create a list of query criteria based on the gender provided in the URL.
+     * Create query criteria based on the gender provided in the URL.
      * @param gender the gender string.
-     * @return the list of criteria for the query.
+     * @return the criteria for gender under a logical $or operator.
      */
-    private List<Criteria> getGenderCriteria(String gender) {
+    private Criteria getGenderCriteria(String gender) {
         List<Criteria> genderCriteria = new ArrayList<>();
         if (gender != null) {
-            if ("unisex".equalsIgnoreCase(gender)) {
-                genderCriteria.add(Criteria.where("gender").is("?"));
-                genderCriteria.add(Criteria.where("gender").is("?F"));
-                genderCriteria.add(Criteria.where("gender").is("?M"));
+            if (UNISEX.equalsIgnoreCase(gender)) {
+                genderCriteria.add(Criteria.where(GENDER).is("?"));
+                genderCriteria.add(Criteria.where(GENDER).is("?F"));
+                genderCriteria.add(Criteria.where(GENDER).is("?M"));
             } else {
-                genderCriteria.add(Criteria.where("gender").regex(gender));
-                genderCriteria.add(Criteria.where("gender").is("?"));
+                genderCriteria.add(Criteria.where(GENDER).regex(gender));
+                genderCriteria.add(Criteria.where(GENDER).is("?"));
             }
+            return new Criteria().orOperator(genderCriteria);
         }
-        return genderCriteria;
+        return null;
     }
 
     /**
-     * Create a list of query criteria based on the countries of origin specified in the URL.
+     * Create query criteria based on the countries of origin specified in the URL.
      * @param countriesOfOrigin object containing the countries of origin.
-     * @return the list of criteria for the query.
+     * @return the criteria including all countries under a logical $or operator.
      */
-    private List<Criteria> getCountriesCriteria(CountriesOfOrigin countriesOfOrigin) {
+    private Criteria getCountriesCriteria(CountriesOfOrigin countriesOfOrigin) {
 
         List<Criteria> criteriaList = new ArrayList<>();
 
@@ -252,7 +263,11 @@ public class FirstNameService {
             criteriaList.add(Criteria.where(VIETNAM).exists(true));
         }
 
-        return criteriaList;
+        if (criteriaList.isEmpty()) {
+            return null;
+        }
+
+        return new Criteria().orOperator(criteriaList);
     }
 
 }

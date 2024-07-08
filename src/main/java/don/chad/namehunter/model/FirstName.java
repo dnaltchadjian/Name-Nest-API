@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import static don.chad.namehunter.util.CountryConstants.*;
+import static don.chad.namehunter.util.NameAppConstants.*;
 
 @Document(collection = "names")
 @AllArgsConstructor
@@ -17,8 +17,9 @@ public class FirstName {
     @Id
     private ObjectId id;
 
+    @Field(NAME)
     private String name;
-
+    @Field(GENDER)
     private String gender;
 
     @Field(GREAT_BRITAIN)
