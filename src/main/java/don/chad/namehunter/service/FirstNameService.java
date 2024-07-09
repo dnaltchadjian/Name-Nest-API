@@ -42,10 +42,11 @@ public class FirstNameService {
      * @param endsWith an expression to be searched for at the end of a name.
      * @param contains an expression to be searched for in any part of the name.
      * @param gender the implied gender of the name (M, F, or unisex).
+     * @param isUnisex whether unisex names are included or not.
      * @param countriesOfOrigin the country weighting for each name contained within an object.
      * @return a List of FirstName objects which match the query.
      */
-    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, CountriesOfOrigin countriesOfOrigin) {
+    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, CountriesOfOrigin countriesOfOrigin) {
 
         Query query = new Query();
         List<Criteria> baseCriteriaList = new ArrayList<>();
@@ -59,7 +60,7 @@ public class FirstNameService {
             baseCriteriaList.add(Criteria.where(NAME).regex(contains, "i"));
         }
 
-        Criteria genderCriteria = getGenderCriteria(gender);
+        Criteria genderCriteria = getGenderCriteria(gender, isUnisex);
         if (genderCriteria != null) {
             baseCriteriaList.add(genderCriteria);
         }
@@ -79,19 +80,20 @@ public class FirstNameService {
     /**
      * Create query criteria based on the gender provided in the URL.
      * @param gender the gender string.
+     * @param isUnisex whether unisex names are included in the criteria.
      * @return the criteria for gender under a logical $or operator.
      */
-    private Criteria getGenderCriteria(String gender) {
+    private Criteria getGenderCriteria(String gender, boolean isUnisex) {
         List<Criteria> genderCriteria = new ArrayList<>();
         if (gender != null) {
-            if (UNISEX.equalsIgnoreCase(gender)) {
+            if (isUnisex) {
                 genderCriteria.add(Criteria.where(GENDER).is("?"));
                 genderCriteria.add(Criteria.where(GENDER).is("?F"));
                 genderCriteria.add(Criteria.where(GENDER).is("?M"));
-            } else {
-                genderCriteria.add(Criteria.where(GENDER).regex(gender));
-                genderCriteria.add(Criteria.where(GENDER).is("?"));
             }
+            genderCriteria.add(Criteria.where(GENDER).regex(gender));
+            genderCriteria.add(Criteria.where(GENDER).is("?"));
+
             return new Criteria().orOperator(genderCriteria);
         }
         return null;

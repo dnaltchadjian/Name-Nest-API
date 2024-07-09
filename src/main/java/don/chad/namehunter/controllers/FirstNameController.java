@@ -49,6 +49,7 @@ public class FirstNameController {
                                                       @RequestParam(required = false) String endsWith,
                                                       @RequestParam(required = false) String contains,
                                                       @RequestParam(required = false) String gender,
+                                                      @RequestParam(required = false) boolean isUnisex,
                                                       @RequestParam(required = false) boolean greatBritain,
                                                       @RequestParam(required = false) boolean ireland,
                                                       @RequestParam(required = false) boolean usa,
@@ -158,7 +159,7 @@ public class FirstNameController {
         countriesOfOrigin.setUkraine(ukraine);
         countriesOfOrigin.setUsa(usa);
         countriesOfOrigin.setVietnam(vietnam);
-        List<FirstName> allNames = firstNameService.getNamesFromQuery(startsWith, endsWith, contains, gender, countriesOfOrigin);
+        List<FirstName> allNames = firstNameService.getNamesFromQuery(startsWith, endsWith, contains, gender, isUnisex, countriesOfOrigin);
         return new ResponseEntity<>(allNames, HttpStatus.OK);
     }
 
