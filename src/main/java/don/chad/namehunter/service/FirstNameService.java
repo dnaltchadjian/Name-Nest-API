@@ -68,7 +68,10 @@ public class FirstNameService {
             baseCriteriaList.add(countriesCriteria);
         }
 
-        Criteria criteria = new Criteria().andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
+        Criteria criteria = new Criteria();
+        if (!baseCriteriaList.isEmpty()) {
+            criteria.andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
+        }
         query.addCriteria(criteria);
         return mongoTemplate.find(query, FirstName.class);
     }
