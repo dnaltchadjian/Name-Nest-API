@@ -59,6 +59,6 @@ public class NameAppConstants {
     public static final String TURKEY = "Turkey";
     public static final String UKRAINE = "Ukraine";
     public static final String USA = "USA";
-    public static final String VIETNAM = "VIETNAM";
+    public static final String VIETNAM = "Vietnam";
 
 }
