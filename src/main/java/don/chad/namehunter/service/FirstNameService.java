@@ -74,7 +74,9 @@ public class FirstNameService {
             criteria.andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
         }
         query.addCriteria(criteria);
-        return mongoTemplate.find(query, FirstName.class);
+        List<FirstName> firstNames = mongoTemplate.find(query, FirstName.class);
+        firstNames.forEach(FirstName::setCountryMap);
+        return firstNames;
     }
 
     /**

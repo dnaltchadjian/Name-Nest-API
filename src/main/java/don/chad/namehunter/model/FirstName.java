@@ -1,11 +1,14 @@
 package don.chad.namehunter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.*;
 
 import static don.chad.namehunter.util.NameAppConstants.*;
 
@@ -23,113 +26,169 @@ public class FirstName {
     private String gender;
 
     @Field(GREAT_BRITAIN)
+    @JsonIgnore
     private Integer greatBritain;
     @Field(IRELAND)
+    @JsonIgnore
     private Integer ireland;
     @Field(USA)
+    @JsonIgnore
     private Integer usa;
     @Field(ITALY)
+    @JsonIgnore
     private Integer italy;
     @Field(MALTA)
+    @JsonIgnore
     private Integer malta;
     @Field(PORTUGAL)
+    @JsonIgnore
     private Integer portugal;
     @Field(SPAIN)
+    @JsonIgnore
     private Integer spain;
     @Field(FRANCE)
+    @JsonIgnore
     private Integer france;
     @Field(LUXEMBOURG)
+    @JsonIgnore
     private Integer luxembourg;
     @Field(THE_NETHERLANDS)
+    @JsonIgnore
     private Integer theNetherlands;
     @Field(EAST_FRISIA)
+    @JsonIgnore
     private Integer eastFrisia;
     @Field(GERMANY)
+    @JsonIgnore
     private Integer germany;
     @Field(AUSTRIA)
+    @JsonIgnore
     private Integer austria;
     @Field(SWISS)
+    @JsonIgnore
     private Integer swiss;
     @Field(ICELAND)
+    @JsonIgnore
     private Integer iceland;
     @Field(DENMARK)
+    @JsonIgnore
     private Integer denmark;
     @Field(NORWAY)
+    @JsonIgnore
     private Integer norway;
     @Field(SWEDEN)
+    @JsonIgnore
     private Integer sweden;
     @Field(FINLAND)
+    @JsonIgnore
     private Integer finland;
     @Field(ESTONIA)
+    @JsonIgnore
     private Integer estonia;
     @Field(LATVIA)
+    @JsonIgnore
     private Integer latvia;
     @Field(LITHUANIA)
+    @JsonIgnore
     private Integer lithuania;
     @Field(POLAND)
+    @JsonIgnore
     private Integer poland;
     @Field(CZECH)
+    @JsonIgnore
     private Integer czech;
     @Field(SLOVAKIA)
+    @JsonIgnore
     private Integer slovakia;
     @Field(HUNGARY)
+    @JsonIgnore
     private Integer hungary;
     @Field(ROMANIA)
+    @JsonIgnore
     private Integer romania;
     @Field(BULGARIA)
+    @JsonIgnore
     private Integer bulgaria;
     @Field(BOSNIA_AND_HERZEGOVINA)
+    @JsonIgnore
     private Integer bosniaAndHerzegovina;
     @Field(CROATIA)
+    @JsonIgnore
     private Integer croatia;
     @Field(KOSOVO)
+    @JsonIgnore
     private Integer kosovo;
     @Field(MACEDONIA)
+    @JsonIgnore
     private Integer macedonia;
     @Field(MONTENEGRO)
+    @JsonIgnore
     private Integer montenegro;
     @Field(SERBIA)
+    @JsonIgnore
     private Integer serbia;
     @Field(SLOVENIA)
+    @JsonIgnore
     private Integer slovenia;
     @Field(ALBANIA)
+    @JsonIgnore
     private Integer albania;
     @Field(GREECE)
+    @JsonIgnore
     private Integer greece;
     @Field(RUSSIA)
+    @JsonIgnore
     private Integer russia;
     @Field(BELARUS)
+    @JsonIgnore
     private Integer belarus;
     @Field(MOLDOVA)
+    @JsonIgnore
     private Integer moldova;
     @Field(UKRAINE)
+    @JsonIgnore
     private Integer ukraine;
     @Field(ARMENIA)
+    @JsonIgnore
     private Integer armenia;
     @Field(AZERBAIJAN)
+    @JsonIgnore
     private Integer azerbaijan;
     @Field(GEORGIA)
+    @JsonIgnore
     private Integer georgia;
     @Field(KAZAKHSTAN_UZBEKISTAN)
+    @JsonIgnore
     private Integer kazakhstanUzbekistan;
     @Field(TURKEY)
+    @JsonIgnore
     private Integer turkey;
     @Field(ARABIA_PERSIA)
+    @JsonIgnore
     private Integer arabiaPersia;
     @Field(ISRAEL)
+    @JsonIgnore
     private Integer israel;
     @Field(CHINA)
+    @JsonIgnore
     private Integer china;
     @Field(INDIA_SRI_LANKA)
+    @JsonIgnore
     private Integer indiaSriLanka;
     @Field(JAPAN)
+    @JsonIgnore
     private Integer japan;
     @Field(KOREA)
+    @JsonIgnore
     private Integer korea;
     @Field(VIETNAM)
+    @JsonIgnore
     private Integer vietnam;
     @Field(OTHER_COUNTRIES)
+    @JsonIgnore
     private Integer otherCountries;
+
+    private Map<Integer, List<String>> countryMap;
 
     public ObjectId getId() {
         return id;
@@ -585,6 +644,156 @@ public class FirstName {
 
     public void setOtherCountries(Integer otherCountries) {
         this.otherCountries = otherCountries;
+    }
+
+    public Map<Integer, List<String>> getCountryMap() {
+        return countryMap;
+    }
+
+    public void setCountryMap() {
+        Map<Integer, List<String>> countryMap = new LinkedHashMap<>();
+        countryMap.computeIfAbsent(albania, v -> new ArrayList<>()).add(ALBANIA);
+        countryMap.computeIfAbsent(armenia, v -> new ArrayList<>()).add(ARMENIA);
+        countryMap.computeIfAbsent(arabiaPersia, v -> new ArrayList<>()).add(ARABIA_PERSIA);
+        countryMap.computeIfAbsent(austria, v -> new ArrayList<>()).add(AUSTRIA);
+        countryMap.computeIfAbsent(azerbaijan, v -> new ArrayList<>()).add(AZERBAIJAN);
+        countryMap.computeIfAbsent(belarus, v -> new ArrayList<>()).add(BELARUS);
+        countryMap.computeIfAbsent(bosniaAndHerzegovina, v -> new ArrayList<>()).add(BOSNIA_AND_HERZEGOVINA);
+        countryMap.computeIfAbsent(bulgaria, v -> new ArrayList<>()).add(BULGARIA);
+        countryMap.computeIfAbsent(china, v -> new ArrayList<>()).add(CHINA);
+        countryMap.computeIfAbsent(croatia, v -> new ArrayList<>()).add(CROATIA);
+        countryMap.computeIfAbsent(czech, v -> new ArrayList<>()).add(CZECH);
+        if (denmark != null) {
+            countryMap.computeIfAbsent(denmark, v -> new ArrayList<>()).add(DENMARK);
+        }
+        if (eastFrisia != null) {
+            countryMap.computeIfAbsent(eastFrisia, v -> new ArrayList<>()).add(EAST_FRISIA);
+        }
+        if (estonia != null) {
+            countryMap.computeIfAbsent(estonia, v -> new ArrayList<>()).add(ESTONIA);
+        }
+        if (finland != null) {
+            countryMap.computeIfAbsent(finland, v -> new ArrayList<>()).add(FINLAND);
+        }
+        if (france != null) {
+            countryMap.computeIfAbsent(france, v -> new ArrayList<>()).add(FRANCE);
+        }
+        if (georgia != null) {
+            countryMap.computeIfAbsent(georgia, v -> new ArrayList<>()).add(GEORGIA);
+        }
+        if (germany != null) {
+            countryMap.computeIfAbsent(germany, v -> new ArrayList<>()).add(GERMANY);
+        }
+        if (greatBritain != null) {
+            countryMap.computeIfAbsent(greatBritain, v -> new ArrayList<>()).add(GREAT_BRITAIN);
+        }
+        if (greece != null) {
+            countryMap.computeIfAbsent(greece, v -> new ArrayList<>()).add(GREECE);
+        }
+        if (hungary != null) {
+            countryMap.computeIfAbsent(hungary, v -> new ArrayList<>()).add(HUNGARY);
+        }
+        if (iceland != null) {
+            countryMap.computeIfAbsent(iceland, v -> new ArrayList<>()).add(ICELAND);
+        }
+        if (indiaSriLanka != null) {
+            countryMap.computeIfAbsent(indiaSriLanka, v -> new ArrayList<>()).add(INDIA_SRI_LANKA);
+        }
+        if (ireland != null) {
+            countryMap.computeIfAbsent(ireland, v -> new ArrayList<>()).add(IRELAND);
+        }
+        if (israel != null) {
+            countryMap.computeIfAbsent(israel, v -> new ArrayList<>()).add(ISRAEL);
+        }
+        if (italy != null) {
+            countryMap.computeIfAbsent(italy, v -> new ArrayList<>()).add(ITALY);
+        }
+        if (japan != null) {
+            countryMap.computeIfAbsent(japan, v -> new ArrayList<>()).add(JAPAN);
+        }
+        if (kazakhstanUzbekistan != null) {
+            countryMap.computeIfAbsent(kazakhstanUzbekistan, v -> new ArrayList<>()).add(KAZAKHSTAN_UZBEKISTAN);
+        }
+        if (korea != null) {
+            countryMap.computeIfAbsent(korea, v -> new ArrayList<>()).add(KOREA);
+        }
+        if (kosovo != null) {
+            countryMap.computeIfAbsent(kosovo, v -> new ArrayList<>()).add(KOSOVO);
+        }
+        if (latvia != null) {
+            countryMap.computeIfAbsent(latvia, v -> new ArrayList<>()).add(LATVIA);
+        }
+        if (lithuania != null) {
+            countryMap.computeIfAbsent(lithuania, v -> new ArrayList<>()).add(LITHUANIA);
+        }
+        if (luxembourg != null) {
+            countryMap.computeIfAbsent(luxembourg, v -> new ArrayList<>()).add(LUXEMBOURG);
+        }
+        if (macedonia != null) {
+            countryMap.computeIfAbsent(macedonia, v -> new ArrayList<>()).add(MACEDONIA);
+        }
+        if (malta != null) {
+            countryMap.computeIfAbsent(malta, v -> new ArrayList<>()).add(MALTA);
+        }
+        if (moldova != null) {
+            countryMap.computeIfAbsent(moldova, v -> new ArrayList<>()).add(MOLDOVA);
+        }
+        if (montenegro != null) {
+            countryMap.computeIfAbsent(montenegro, v -> new ArrayList<>()).add(MONTENEGRO);
+        }
+        if (norway != null) {
+            countryMap.computeIfAbsent(norway, v -> new ArrayList<>()).add(NORWAY);
+        }
+        if (otherCountries != null) {
+            countryMap.computeIfAbsent(otherCountries, v -> new ArrayList<>()).add(OTHER_COUNTRIES);
+        }
+        if (poland != null) {
+            countryMap.computeIfAbsent(poland, v -> new ArrayList<>()).add(POLAND);
+        }
+        if (portugal != null) {
+            countryMap.computeIfAbsent(portugal, v -> new ArrayList<>()).add(PORTUGAL);
+        }
+        if (romania != null) {
+            countryMap.computeIfAbsent(romania, v -> new ArrayList<>()).add(ROMANIA);
+        }
+        if (russia != null) {
+            countryMap.computeIfAbsent(russia, v -> new ArrayList<>()).add(RUSSIA);
+        }
+        if (serbia != null) {
+            countryMap.computeIfAbsent(serbia, v -> new ArrayList<>()).add(SERBIA);
+        }
+        if (slovakia != null) {
+            countryMap.computeIfAbsent(slovakia, v -> new ArrayList<>()).add(SLOVAKIA);
+        }
+        if (slovenia != null) {
+            countryMap.computeIfAbsent(slovenia, v -> new ArrayList<>()).add(SLOVENIA);
+        }
+        if (spain != null) {
+            countryMap.computeIfAbsent(spain, v -> new ArrayList<>()).add(SPAIN);
+        }
+        if (sweden != null) {
+            countryMap.computeIfAbsent(sweden, v -> new ArrayList<>()).add(SWEDEN);
+        }
+        if (swiss != null) {
+            countryMap.computeIfAbsent(swiss, v -> new ArrayList<>()).add(SWISS);
+        }
+        if (turkey != null) {
+            countryMap.computeIfAbsent(turkey, v -> new ArrayList<>()).add(TURKEY);
+        }
+        if (theNetherlands != null) {
+            countryMap.computeIfAbsent(theNetherlands, v -> new ArrayList<>()).add(THE_NETHERLANDS);
+        }
+        if (ukraine != null) {
+            countryMap.computeIfAbsent(ukraine, v -> new ArrayList<>()).add(UKRAINE);
+        }
+        if (usa != null) {
+            countryMap.computeIfAbsent(usa, v -> new ArrayList<>()).add(USA);
+        }
+        if (vietnam != null) {
+            countryMap.computeIfAbsent(vietnam, v -> new ArrayList<>()).add(VIETNAM);
+        }
+        countryMap.remove(null);
+        this.countryMap = countryMap;
     }
 
     @Override
