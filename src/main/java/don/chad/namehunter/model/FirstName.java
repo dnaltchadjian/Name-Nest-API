@@ -188,7 +188,7 @@ public class FirstName {
     @JsonIgnore
     private Integer otherCountries;
 
-    private Map<Integer, List<String>> countryMap;
+    private Map<String, Integer> countryMap;
 
     public ObjectId getId() {
         return id;
@@ -646,151 +646,173 @@ public class FirstName {
         this.otherCountries = otherCountries;
     }
 
-    public Map<Integer, List<String>> getCountryMap() {
+    public Map<String, Integer> getCountryMap() {
         return countryMap;
     }
 
     public void setCountryMap() {
-        Map<Integer, List<String>> countryMap = new LinkedHashMap<>();
-        countryMap.computeIfAbsent(albania, v -> new ArrayList<>()).add(ALBANIA);
-        countryMap.computeIfAbsent(armenia, v -> new ArrayList<>()).add(ARMENIA);
-        countryMap.computeIfAbsent(arabiaPersia, v -> new ArrayList<>()).add(ARABIA_PERSIA);
-        countryMap.computeIfAbsent(austria, v -> new ArrayList<>()).add(AUSTRIA);
-        countryMap.computeIfAbsent(azerbaijan, v -> new ArrayList<>()).add(AZERBAIJAN);
-        countryMap.computeIfAbsent(belarus, v -> new ArrayList<>()).add(BELARUS);
-        countryMap.computeIfAbsent(bosniaAndHerzegovina, v -> new ArrayList<>()).add(BOSNIA_AND_HERZEGOVINA);
-        countryMap.computeIfAbsent(bulgaria, v -> new ArrayList<>()).add(BULGARIA);
-        countryMap.computeIfAbsent(china, v -> new ArrayList<>()).add(CHINA);
-        countryMap.computeIfAbsent(croatia, v -> new ArrayList<>()).add(CROATIA);
-        countryMap.computeIfAbsent(czech, v -> new ArrayList<>()).add(CZECH);
+        Map<String, Integer> countryMap = new LinkedHashMap<>();
+        if (albania != null) {
+            countryMap.put(ALBANIA, albania);
+        }
+        if (arabiaPersia != null) {
+            countryMap.put(ARABIA_PERSIA, arabiaPersia);
+        }
+        if (armenia != null) {
+            countryMap.put(ARMENIA, armenia);
+        }
+        if (austria != null) {
+            countryMap.put(AUSTRIA, austria);
+        }
+        if (azerbaijan != null) {
+            countryMap.put(AZERBAIJAN, azerbaijan);
+        }
+        if (belarus != null) {
+            countryMap.put(BELARUS, belarus);
+        }
+        if (bosniaAndHerzegovina != null) {
+            countryMap.put(BOSNIA_AND_HERZEGOVINA, bosniaAndHerzegovina);
+        }
+        if (bulgaria != null) {
+            countryMap.put(BULGARIA, bulgaria);
+        }
+        if (china != null) {
+            countryMap.put(CHINA, china);
+        }
+        if (croatia != null) {
+            countryMap.put(CROATIA, croatia);
+        }
+        if (czech != null) {
+            countryMap.put(CZECH, czech);
+        }
         if (denmark != null) {
-            countryMap.computeIfAbsent(denmark, v -> new ArrayList<>()).add(DENMARK);
+            countryMap.put(DENMARK, denmark);
         }
         if (eastFrisia != null) {
-            countryMap.computeIfAbsent(eastFrisia, v -> new ArrayList<>()).add(EAST_FRISIA);
+            countryMap.put(EAST_FRISIA, eastFrisia);
         }
         if (estonia != null) {
-            countryMap.computeIfAbsent(estonia, v -> new ArrayList<>()).add(ESTONIA);
+            countryMap.put(ESTONIA, estonia);
         }
         if (finland != null) {
-            countryMap.computeIfAbsent(finland, v -> new ArrayList<>()).add(FINLAND);
+            countryMap.put(FINLAND, finland);
         }
         if (france != null) {
-            countryMap.computeIfAbsent(france, v -> new ArrayList<>()).add(FRANCE);
+            countryMap.put(FRANCE, france);
         }
         if (georgia != null) {
-            countryMap.computeIfAbsent(georgia, v -> new ArrayList<>()).add(GEORGIA);
+            countryMap.put(GEORGIA, georgia);
         }
         if (germany != null) {
-            countryMap.computeIfAbsent(germany, v -> new ArrayList<>()).add(GERMANY);
+            countryMap.put(GERMANY, germany);
         }
         if (greatBritain != null) {
-            countryMap.computeIfAbsent(greatBritain, v -> new ArrayList<>()).add(GREAT_BRITAIN);
+            countryMap.put(GREAT_BRITAIN,greatBritain);
         }
         if (greece != null) {
-            countryMap.computeIfAbsent(greece, v -> new ArrayList<>()).add(GREECE);
+            countryMap.put(GREECE, greece);
         }
         if (hungary != null) {
-            countryMap.computeIfAbsent(hungary, v -> new ArrayList<>()).add(HUNGARY);
+            countryMap.put(HUNGARY, hungary);
         }
         if (iceland != null) {
-            countryMap.computeIfAbsent(iceland, v -> new ArrayList<>()).add(ICELAND);
+            countryMap.put(ICELAND, iceland);
         }
         if (indiaSriLanka != null) {
-            countryMap.computeIfAbsent(indiaSriLanka, v -> new ArrayList<>()).add(INDIA_SRI_LANKA);
+            countryMap.put(INDIA_SRI_LANKA, indiaSriLanka);
         }
         if (ireland != null) {
-            countryMap.computeIfAbsent(ireland, v -> new ArrayList<>()).add(IRELAND);
+            countryMap.put(IRELAND, ireland);
         }
         if (israel != null) {
-            countryMap.computeIfAbsent(israel, v -> new ArrayList<>()).add(ISRAEL);
+            countryMap.put(ISRAEL, israel);
         }
         if (italy != null) {
-            countryMap.computeIfAbsent(italy, v -> new ArrayList<>()).add(ITALY);
+            countryMap.put(ITALY, italy);
         }
         if (japan != null) {
-            countryMap.computeIfAbsent(japan, v -> new ArrayList<>()).add(JAPAN);
+            countryMap.put(JAPAN, japan);
         }
         if (kazakhstanUzbekistan != null) {
-            countryMap.computeIfAbsent(kazakhstanUzbekistan, v -> new ArrayList<>()).add(KAZAKHSTAN_UZBEKISTAN);
+            countryMap.put(KAZAKHSTAN_UZBEKISTAN, kazakhstanUzbekistan);
         }
         if (korea != null) {
-            countryMap.computeIfAbsent(korea, v -> new ArrayList<>()).add(KOREA);
+            countryMap.put(KOREA, korea);
         }
         if (kosovo != null) {
-            countryMap.computeIfAbsent(kosovo, v -> new ArrayList<>()).add(KOSOVO);
+            countryMap.put(KOSOVO, kosovo);
         }
         if (latvia != null) {
-            countryMap.computeIfAbsent(latvia, v -> new ArrayList<>()).add(LATVIA);
+            countryMap.put(LATVIA, latvia);
         }
         if (lithuania != null) {
-            countryMap.computeIfAbsent(lithuania, v -> new ArrayList<>()).add(LITHUANIA);
+            countryMap.put(LITHUANIA, lithuania);
         }
         if (luxembourg != null) {
-            countryMap.computeIfAbsent(luxembourg, v -> new ArrayList<>()).add(LUXEMBOURG);
+            countryMap.put(LUXEMBOURG, luxembourg);
         }
         if (macedonia != null) {
-            countryMap.computeIfAbsent(macedonia, v -> new ArrayList<>()).add(MACEDONIA);
+            countryMap.put(MACEDONIA, macedonia);
         }
         if (malta != null) {
-            countryMap.computeIfAbsent(malta, v -> new ArrayList<>()).add(MALTA);
+            countryMap.put(MALTA, malta);
         }
         if (moldova != null) {
-            countryMap.computeIfAbsent(moldova, v -> new ArrayList<>()).add(MOLDOVA);
+            countryMap.put(MOLDOVA, moldova);
         }
         if (montenegro != null) {
-            countryMap.computeIfAbsent(montenegro, v -> new ArrayList<>()).add(MONTENEGRO);
+            countryMap.put(MONTENEGRO, montenegro);
         }
         if (norway != null) {
-            countryMap.computeIfAbsent(norway, v -> new ArrayList<>()).add(NORWAY);
+            countryMap.put(NORWAY, norway);
         }
         if (otherCountries != null) {
-            countryMap.computeIfAbsent(otherCountries, v -> new ArrayList<>()).add(OTHER_COUNTRIES);
+            countryMap.put(OTHER_COUNTRIES, otherCountries);
         }
         if (poland != null) {
-            countryMap.computeIfAbsent(poland, v -> new ArrayList<>()).add(POLAND);
+            countryMap.put(POLAND, poland);
         }
         if (portugal != null) {
-            countryMap.computeIfAbsent(portugal, v -> new ArrayList<>()).add(PORTUGAL);
+            countryMap.put(PORTUGAL, portugal);
         }
         if (romania != null) {
-            countryMap.computeIfAbsent(romania, v -> new ArrayList<>()).add(ROMANIA);
+            countryMap.put(ROMANIA, romania);
         }
         if (russia != null) {
-            countryMap.computeIfAbsent(russia, v -> new ArrayList<>()).add(RUSSIA);
+            countryMap.put(RUSSIA, russia);
         }
         if (serbia != null) {
-            countryMap.computeIfAbsent(serbia, v -> new ArrayList<>()).add(SERBIA);
+            countryMap.put(SERBIA, serbia);
         }
         if (slovakia != null) {
-            countryMap.computeIfAbsent(slovakia, v -> new ArrayList<>()).add(SLOVAKIA);
+            countryMap.put(SLOVAKIA, slovakia);
         }
         if (slovenia != null) {
-            countryMap.computeIfAbsent(slovenia, v -> new ArrayList<>()).add(SLOVENIA);
+            countryMap.put(SLOVENIA, slovenia);
         }
         if (spain != null) {
-            countryMap.computeIfAbsent(spain, v -> new ArrayList<>()).add(SPAIN);
+            countryMap.put(SPAIN, spain);
         }
         if (sweden != null) {
-            countryMap.computeIfAbsent(sweden, v -> new ArrayList<>()).add(SWEDEN);
+            countryMap.put(SWEDEN, sweden);
         }
         if (swiss != null) {
-            countryMap.computeIfAbsent(swiss, v -> new ArrayList<>()).add(SWISS);
+            countryMap.put(SWISS, swiss);
         }
         if (turkey != null) {
-            countryMap.computeIfAbsent(turkey, v -> new ArrayList<>()).add(TURKEY);
+            countryMap.put(TURKEY, turkey);
         }
         if (theNetherlands != null) {
-            countryMap.computeIfAbsent(theNetherlands, v -> new ArrayList<>()).add(THE_NETHERLANDS);
+            countryMap.put(THE_NETHERLANDS, theNetherlands);
         }
         if (ukraine != null) {
-            countryMap.computeIfAbsent(ukraine, v -> new ArrayList<>()).add(UKRAINE);
+            countryMap.put(UKRAINE, ukraine);
         }
         if (usa != null) {
-            countryMap.computeIfAbsent(usa, v -> new ArrayList<>()).add(USA);
+            countryMap.put(USA, usa);
         }
         if (vietnam != null) {
-            countryMap.computeIfAbsent(vietnam, v -> new ArrayList<>()).add(VIETNAM);
+            countryMap.put(VIETNAM, vietnam);
         }
         countryMap.remove(null);
         this.countryMap = countryMap;
