@@ -16,7 +16,7 @@ public class NameAppConstants {
     public static final String BULGARIA = "Bulgaria";
     public static final String CHINA = "China";
     public static final String CROATIA = "Croatia";
-    public static final String CZECH = "Czech";
+    public static final String CZECH = "Czech Republic";
     public static final String DENMARK = "Denmark";
     public static final String EAST_FRISIA = "East Frisia";
     public static final String ESTONIA = "Estonia";
