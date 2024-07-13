@@ -33,7 +33,7 @@ public class NameAppConstants {
     public static final String ISRAEL = "Israel";
     public static final String ITALY = "Italy";
     public static final String JAPAN = "Japan";
-    public static final String KAZAKHSTAN_UZBEKISTAN = "Kazakhstan/Uzbekistan";
+    public static final String KAZAKHSTAN_UZBEKISTAN = "Kazakhstan/Uzbekistan,etc";
     public static final String KOREA = "Korea";
     public static final String KOSOVO = "Kosovo";
     public static final String LATVIA = "Latvia";

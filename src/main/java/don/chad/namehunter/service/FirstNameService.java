@@ -4,6 +4,7 @@ import don.chad.namehunter.model.CountriesOfOrigin;
 import don.chad.namehunter.model.FirstName;
 import don.chad.namehunter.repository.FirstNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -74,6 +75,7 @@ public class FirstNameService {
             criteria.andOperator(baseCriteriaList.toArray(new Criteria[baseCriteriaList.size()]));
         }
         query.addCriteria(criteria);
+        query.with(Sort.by(Sort.Direction.ASC, NAME));
         List<FirstName> firstNames = mongoTemplate.find(query, FirstName.class);
         firstNames.forEach(FirstName::setCountryMap);
         return firstNames;
