@@ -51,6 +51,7 @@ public class FirstNameController {
                                                       @RequestParam(required = false) String gender,
                                                       @RequestParam(required = false) boolean isUnisex,
                                                       @RequestParam(required = false) Integer pageNumber,
+                                                      @RequestParam(required = false) Integer pageSize,
                                                       @RequestParam(required = false) boolean greatBritain,
                                                       @RequestParam(required = false) boolean ireland,
                                                       @RequestParam(required = false) boolean usa,
@@ -160,7 +161,7 @@ public class FirstNameController {
         countriesOfOrigin.setUkraine(ukraine);
         countriesOfOrigin.setUsa(usa);
         countriesOfOrigin.setVietnam(vietnam);
-        List<FirstName> allNames = firstNameService.getNamesFromQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, countriesOfOrigin);
+        List<FirstName> allNames = firstNameService.getNamesFromQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, pageSize, countriesOfOrigin);
         return new ResponseEntity<>(allNames, HttpStatus.OK);
     }
 
@@ -171,6 +172,7 @@ public class FirstNameController {
                                                       @RequestParam(required = false) String gender,
                                                       @RequestParam(required = false) boolean isUnisex,
                                                       @RequestParam(required = false) Integer pageNumber,
+                                                      @RequestParam(required = false) Integer pageSize,
                                                       @RequestParam(required = false) boolean greatBritain,
                                                       @RequestParam(required = false) boolean ireland,
                                                       @RequestParam(required = false) boolean usa,
@@ -280,7 +282,7 @@ public class FirstNameController {
         countriesOfOrigin.setUkraine(ukraine);
         countriesOfOrigin.setUsa(usa);
         countriesOfOrigin.setVietnam(vietnam);
-        Long nameCount = firstNameService.getNameCountFromQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, countriesOfOrigin);
+        Long nameCount = firstNameService.getNameCountFromQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, pageSize, countriesOfOrigin);
         return new ResponseEntity<>(nameCount, HttpStatus.OK);
     }
 

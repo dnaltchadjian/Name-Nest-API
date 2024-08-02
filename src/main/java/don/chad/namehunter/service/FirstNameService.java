@@ -5,7 +5,6 @@ import don.chad.namehunter.model.FirstName;
 import don.chad.namehunter.repository.FirstNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -19,6 +18,8 @@ import static don.chad.namehunter.util.NameAppConstants.*;
 
 @Service
 public class FirstNameService {
+
+    private static final int DEFAULT_PAGE_SIZE = 10;
 
     @Autowired
     private FirstNameRepository firstNameRepository;
@@ -47,11 +48,13 @@ public class FirstNameService {
      * @param gender the implied gender of the name (M, F, or unisex).
      * @param isUnisex whether unisex names are included or not.
      * @param pageNumber a page number for paginated results.
+     * @param pageSize the number of results to display per page.
      * @param countriesOfOrigin the country weighting for each name contained within an object.
      * @return a List of FirstName objects which match the query.
      */
-    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber, CountriesOfOrigin countriesOfOrigin) {
-        Query query = constructQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, countriesOfOrigin);
+    public List<FirstName> getNamesFromQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber,
+                                             Integer pageSize, CountriesOfOrigin countriesOfOrigin) {
+        Query query = constructQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, pageSize, countriesOfOrigin);
         List<FirstName> firstNames = mongoTemplate.find(query, FirstName.class);
         firstNames.forEach(FirstName::setCountryMap);
         return firstNames;
@@ -65,11 +68,13 @@ public class FirstNameService {
      * @param gender the implied gender of the name (M, F, or unisex).
      * @param isUnisex whether unisex names are included or not.
      * @param pageNumber a page number for paginated results.
+     * @param pageSize the number of results to display per page.
      * @param countriesOfOrigin the country weighting for each name contained within an object.
      * @return a count of the names which match the query criteria.
      */
-    public long getNameCountFromQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber, CountriesOfOrigin countriesOfOrigin) {
-        Query query = constructQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, countriesOfOrigin);
+    public long getNameCountFromQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber,
+                                      Integer pageSize, CountriesOfOrigin countriesOfOrigin) {
+        Query query = constructQuery(startsWith, endsWith, contains, gender, isUnisex, pageNumber, pageSize, countriesOfOrigin);
         return mongoTemplate.count(query, FirstName.class);
     }
 
@@ -81,10 +86,12 @@ public class FirstNameService {
      * @param gender the implied gender of the name (M, F, or unisex).
      * @param isUnisex whether unisex names are included or not.
      * @param pageNumber a page number for paginated results.
+     * @param pageSize the number of results to display per page.
      * @param countriesOfOrigin the country weighting for each name contained within an object.
      * @return a fully built mongo query for finding names.
      */
-    private Query constructQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber, CountriesOfOrigin countriesOfOrigin) {
+    private Query constructQuery(String startsWith, String endsWith, String contains, String gender, boolean isUnisex, Integer pageNumber,
+                                 Integer pageSize, CountriesOfOrigin countriesOfOrigin) {
         Query query = new Query();
         List<Criteria> baseCriteriaList = new ArrayList<>();
         if (startsWith != null) {
@@ -113,7 +120,7 @@ public class FirstNameService {
         query.addCriteria(criteria);
         query.with(Sort.by(Sort.Direction.ASC, NAME));
         if (pageNumber != null) {
-            query.with(PageRequest.of(pageNumber, 10));
+            query.with(PageRequest.of(pageNumber, pageSize == null ? DEFAULT_PAGE_SIZE : pageSize));
         }
         return query;
     }
