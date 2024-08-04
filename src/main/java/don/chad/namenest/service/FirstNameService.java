@@ -1,8 +1,8 @@
-package don.chad.namehunter.service;
+package don.chad.namenest.service;
 
-import don.chad.namehunter.model.CountriesOfOrigin;
-import don.chad.namehunter.model.FirstName;
-import don.chad.namehunter.repository.FirstNameRepository;
+import don.chad.namenest.model.CountriesOfOrigin;
+import don.chad.namenest.model.FirstName;
+import don.chad.namenest.repository.FirstNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,8 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static don.chad.namehunter.util.NameAppConstants.*;
+import static don.chad.namenest.util.NameAppConstants.*;
 
+/**
+ * The service class for all API calls.
+ */
 @Service
 public class FirstNameService {
 

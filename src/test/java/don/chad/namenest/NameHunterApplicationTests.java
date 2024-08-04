@@ -1,4 +1,4 @@
-package don.chad.namehunter;
+package don.chad.namenest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

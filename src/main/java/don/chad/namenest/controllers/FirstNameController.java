@@ -1,8 +1,8 @@
-package don.chad.namehunter.controllers;
+package don.chad.namenest.controllers;
 
-import don.chad.namehunter.model.CountriesOfOrigin;
-import don.chad.namehunter.model.FirstName;
-import don.chad.namehunter.service.FirstNameService;
+import don.chad.namenest.model.CountriesOfOrigin;
+import don.chad.namenest.model.FirstName;
+import don.chad.namenest.service.FirstNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Controller for API calls to collect basic name information.
+ */
 @CrossOrigin(origins = "*")
 @RestController
 public class FirstNameController {

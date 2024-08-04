@@ -1,4 +1,4 @@
-package don.chad.namehunter.model;
+package don.chad.namenest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.*;
 
-import static don.chad.namehunter.util.NameAppConstants.*;
+import static don.chad.namenest.util.NameAppConstants.*;
 
+/**
+ * Mongodb Document class for the name database.
+ */
 @Document(collection = "names")
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,7 +1,8 @@
-package don.chad.namehunter.model;
+package don.chad.namenest.model;
 
-import org.springframework.data.mongodb.core.mapping.Field;
-
+/**
+ * POJO for representing country data for names.
+ */
 public class CountriesOfOrigin {
 
     private boolean greatBritain;
