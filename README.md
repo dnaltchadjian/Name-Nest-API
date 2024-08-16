@@ -33,7 +33,7 @@ These parameters are only used in the **namesQuery** endpoint.
 
 ### JSON Return Data
 
-####namesQuery endpoint
+#### namesQuery endpoint
  - **name**: the actual name string
  - **gender**: the gender, represented in single letter format; see [firstname-database](#sources-and-other-information) below for link to database with gender coding rules
  - **countryMap**: a map containing each of the country frequency scores; see [firstname-database](#sources-and-other-information) below for link to database with frequency scoring rules
@@ -78,7 +78,7 @@ Sample output from hitting endpoint: "/api/v1/names**Query**?startsWith=ott&ends
 ]
 ```
 
-####namesCount endpoint
+#### namesCount endpoint
 
  Sample output from hitting "/api/v1/names**Count**?startsWith=ott&endsWith=o&contains=v"
 ```json
