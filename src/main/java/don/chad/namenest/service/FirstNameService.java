@@ -168,6 +168,9 @@ public class FirstNameService {
         if (countriesOfOrigin.isArmenia()) {
             criteriaList.add(Criteria.where(ARMENIA).exists(true));
         }
+        if (countriesOfOrigin.isAustria()) {
+            criteriaList.add(Criteria.where(AUSTRIA).exists(true));
+        }
         if (countriesOfOrigin.isAzerbaijan()) {
             criteriaList.add(Criteria.where(AZERBAIJAN).exists(true));
         }
